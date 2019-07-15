@@ -2063,4 +2063,10 @@ describe Mail::Message do
     end
   end
 
+  describe "parsing emails with non usascii in multi cc" do
+    it "should work" do
+      mail = Mail::Message.new(:cc => "\"'team.ant-Bocimar'\" <team.ant-Bocimar@angloeastern.com>, \"'aeop.ant'\" <aeop.ant@angloeastern.com>, \"苏州港航\" <pisfaco@vip.163.com>")
+      expect(mail.cc).to eq "\"'team.ant-Bocimar'\" <team.ant-Bocimar@angloeastern.com>, \"'aeop.ant'\" <aeop.ant@angloeastern.com>, \"苏州港航\" <pisfaco@vip.163.com>"
+    end
+  end
 end
